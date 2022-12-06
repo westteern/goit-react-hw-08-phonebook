@@ -4,13 +4,9 @@ import { Component } from 'react';
 
 import { SectionPhonebook, Notification } from './App.styled';
 
-
-
 import DataInput from './DataInput';
 import DataList from './DataList';
 import Filter from './DataFilter';
-
-
 
 class App extends Component {
   state = {
@@ -21,6 +17,20 @@ class App extends Component {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '',
+  };
+
+  componentDidMount() {
+    const contacts = localStorage.getItem('contacts');
+    const parsedContatcs = JSON.parse(contacts);
+    if (parsedContatcs) {
+      this.setState({ contacts: parsedContatcs });
+    };
+  };
+
+  componentDidUpdate(_, prevState) {
+    if (this.state.contacts !== prevState.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    };   
   };
 
   handleSubmitForm = data => {
