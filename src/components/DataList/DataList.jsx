@@ -5,13 +5,13 @@ import { SectionContacts } from './DataList.styled';
 const DataList = ({ contacts, onDelContact }) => (
   <SectionContacts>
     {contacts.map(({ id, name, number }) => (
-        <DataItem
-          key={id}
-          id={id}
-          name={name}
-          number={number}
-          onDelContact={()=> onDelContact(id)}
-        />
+      <DataItem
+        key={id}
+        id={id}
+        name={name}
+        number={number}
+        onDelContact={() => onDelContact(id)}
+      />
     ))}
   </SectionContacts>
 );
