@@ -17,7 +17,10 @@ const phoneContacts = [
 
 const App = () => {
   const [contacts, setContacts] = useState(() => {
-    return JSON.parse(window.localStorage.getItem('contacts')) ?? phoneContacts;
+    const localStorageValue = JSON.parse(
+      window.localStorage.getItem('contacts')
+    );
+    return localStorageValue ?? phoneContacts;
   });
   const [filter, setFilter] = useState('');
 
