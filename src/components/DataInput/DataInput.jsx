@@ -1,5 +1,6 @@
-import PropTypes from 'prop-types';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addContact } from 'redux/contactsSlice';
 import {
   SubmitBtn,
   LableInput,
@@ -8,9 +9,10 @@ import {
   Input,
 } from './DataInput.styled';
 
-const DataInput = ({ onSubmit }) => {
+const DataInput = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+  const dispatch = useDispatch();
 
   const handleInput = e => {
     const { name, value } = e.target;
@@ -27,7 +29,7 @@ const DataInput = ({ onSubmit }) => {
   };
   const handleSubmit = e => {
     e.preventDefault();
-    onSubmit({ name, number });
+    dispatch(addContact(name, number));
     resetValue();
   };
   const resetValue = () => {
@@ -68,10 +70,6 @@ const DataInput = ({ onSubmit }) => {
       </FormInput>
     </SectionFormInput>
   );
-};
-
-DataInput.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
 };
 
 export default DataInput;

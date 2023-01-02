@@ -10,5 +10,10 @@ export const SectionContacts = styled.ul`
 
   background-color: #ebdf02;
   border-radius: 4px;
-  font-family: Roboto;  
+  font-family: Roboto;
+`;
+export const Notification = styled.p`
+  font-family: Roboto;
+  font-weight: 700;
+  text-align: center;
 `;
