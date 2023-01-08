@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { deleteContact } from 'redux/contactsSlice';
+import { deleteContact } from 'redux/apiService';
 import { Contact, Btn } from './DataItem.styled';
+import { AiOutlineUserDelete } from 'react-icons/ai';
 
 const DataItem = ({ id, name, number }) => {
   const dispatch = useDispatch();
@@ -12,7 +13,15 @@ const DataItem = ({ id, name, number }) => {
     <Contact>
       <p>{name}:</p>
       <p>{number}</p>
-      <Btn onClick={() => deleteContactById(id)}>Delete</Btn>
+      <Btn onClick={() => deleteContactById(id)}>
+        <AiOutlineUserDelete
+          style={{
+            width: '20',
+            height: '20',
+            verticalAlign: 'middle',
+          }}
+        />
+      </Btn>
     </Contact>
   );
 };

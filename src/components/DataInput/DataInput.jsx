@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { addContact } from 'redux/contactsSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { getContacts } from 'redux/selectors';
+import { addContact } from 'redux/apiService';
 import {
   SubmitBtn,
   LableInput,
@@ -8,11 +9,13 @@ import {
   SectionFormInput,
   Input,
 } from './DataInput.styled';
+import { AiOutlineUserAdd } from 'react-icons/ai';
 
 const DataInput = () => {
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [phone, setPhone] = useState('');
   const dispatch = useDispatch();
+  const contacts = useSelector(getContacts);
 
   const handleInput = e => {
     const { name, value } = e.target;
@@ -21,7 +24,7 @@ const DataInput = () => {
         setName(value);
         break;
       case 'number':
-        setNumber(value);
+        setPhone(value);
         break;
       default:
         return;
@@ -29,12 +32,15 @@ const DataInput = () => {
   };
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(addContact(name, number));
+    const repeatCheck = contacts.find(contact => contact.name === name);
+    repeatCheck
+      ? alert(`${name} is already in contacts!`)
+      : dispatch(addContact({ name, phone }));
     resetValue();
   };
   const resetValue = () => {
     setName('');
-    setNumber('');
+    setPhone('');
   };
 
   return (
@@ -58,7 +64,7 @@ const DataInput = () => {
           <Input
             type="tel"
             name="number"
-            value={number}
+            value={phone}
             onChange={handleInput}
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
@@ -66,7 +72,16 @@ const DataInput = () => {
           />
         </LableInput>
 
-        <SubmitBtn type="submit">Add contact</SubmitBtn>
+        <SubmitBtn type="submit">
+          Add contact
+          <AiOutlineUserAdd
+            style={{
+              width: '20',
+              height: '20',
+              verticalAlign: 'middle',
+            }}
+          />
+        </SubmitBtn>
       </FormInput>
     </SectionFormInput>
   );

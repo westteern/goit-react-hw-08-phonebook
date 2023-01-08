@@ -1,41 +1,56 @@
-import { createSlice, nanoid } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
+import { fetchAllContacts, addContact, deleteContact } from './apiService';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const contactsInitialState = [
-  { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-  { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-  { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-  { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-];
+const handlePending = state => {
+  state.isLoading = true;
+};
+const handleRejected = (state, action) => {
+  state.isLoading = false;
+  state.error = action.payload;
+};
 
-const tasksSlice = createSlice({
+const contactSlice = createSlice({
   name: 'contacts',
-  initialState: contactsInitialState,
-  reducers: {
-    addContact: {
-      reducer(state, action) {
-        const repeatCheck = state.find(
-          contact => contact.name === action.payload.name
-        );
-        repeatCheck
-          ? alert(`${action.payload.name} is already in contacts!`)
-          : state.push(action.payload);
-      },
-      prepare(name, number) {
-        return {
-          payload: {
-            name: name,
-            number: number,
-            id: nanoid(),
-          },
-        };
-      },
+  initialState: {
+    items: [],
+    isLoading: false,
+    error: null,
+  },
+  extraReducers: {
+    [fetchAllContacts.pending]: handlePending,
+    [addContact.pending]: handlePending,
+    [deleteContact.pending]: handlePending,
+    [fetchAllContacts.rejected]: handleRejected,
+    [addContact.rejected]: handleRejected,
+    [deleteContact.rejected]: handleRejected,
+    [fetchAllContacts.fulfilled](state, action) {
+      state.isLoading = false;
+      state.error = null;
+      state.items = action.payload;
     },
+    [addContact.fulfilled](state, action) {
+      state.isLoading = false;
+      state.error = null;
+      state.items.push(action.payload);
+      toast.info('contact added');
+    },
+    [deleteContact.fulfilled](state, action) {
+      state.isLoading = false;
+      state.error = null;
+      const index = state.items.findIndex(
+        contact => contact.id === action.payload.id
+      );
+      state.items.splice(index, 1);
+      toast.info('contact removed');
+    },
+
     deleteContact(state, action) {
-      const index = state.filter(contact => contact.id === action.payload.id);
+      const index = state.filter(contact => contact.id !== action.payload.id);
       state.splice(index, 1);
     },
   },
 });
 
-export const { addContact, deleteContact } = tasksSlice.actions;
-export const contactReducer = tasksSlice.reducer;
+export const contactReducer = contactSlice.reducer;
