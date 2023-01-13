@@ -1,7 +1,11 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAllContacts } from 'redux/apiService';
-import { getContacts, getFilterResults, getIsLoading } from 'redux/selectors';
+import { fetchAllContacts } from 'redux/contacts/apiService';
+import {
+  getContacts,
+  getFilterResults,
+  getIsLoading,
+} from 'redux/contacts/selectors';
 import { SectionContacts, Notification } from './DataList.styled';
 import DataItem from 'components/DataItem';
 import Filter from 'components/DataFilter';

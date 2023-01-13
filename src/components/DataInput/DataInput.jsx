@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getContacts } from 'redux/selectors';
-import { addContact } from 'redux/apiService';
+import { getContacts } from 'redux/contacts/selectors';
+import { addContact } from 'redux/contacts/apiService';
 import {
   SubmitBtn,
   LableInput,

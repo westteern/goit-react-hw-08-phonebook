@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { deleteContact } from 'redux/apiService';
+import { deleteContact } from 'redux/contacts/apiService';
 import { Contact, Btn } from './DataItem.styled';
 import { AiOutlineUserDelete } from 'react-icons/ai';
 

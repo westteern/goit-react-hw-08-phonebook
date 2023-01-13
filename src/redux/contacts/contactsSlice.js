@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { logOut } from 'redux/auth/service';
 import { fetchAllContacts, addContact, deleteContact } from './apiService';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -44,6 +45,11 @@ const contactSlice = createSlice({
       );
       state.items.splice(index, 1);
       toast.info('contact removed');
+    },
+    [logOut.fulfilled](state) {
+      state.items = [];
+      state.error = null;
+      state.isLoading = false;
     },
 
     deleteContact(state, action) {
