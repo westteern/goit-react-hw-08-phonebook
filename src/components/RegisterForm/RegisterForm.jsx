@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
-import { register } from 'redux/auth/operations';
+import { register } from 'redux/auth/service';
 
-const RegisterForm = () => {
+export const RegisterForm = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = e => {
@@ -35,5 +35,3 @@ const RegisterForm = () => {
     </form>
   );
 };
-
-export default RegisterForm;
