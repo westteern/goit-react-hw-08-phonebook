@@ -39,8 +39,8 @@ const DataList = () => {
                 No contacts were found for your request
               </Notification>
             )}
-            {filtredContacts.map(({ id, name, phone }) => (
-              <DataItem key={id} id={id} name={name} number={phone} />
+            {filtredContacts.map(({ id, name, number }) => (
+              <DataItem key={id} id={id} name={name} number={number} />
             ))}
           </SectionContacts>
         </>
