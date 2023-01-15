@@ -2,7 +2,7 @@ import { useAuth } from 'hooks/useAuth';
 import { useDispatch } from 'react-redux';
 import { logOut } from 'redux/auth/service';
 
-import { Btn } from './UserMenu.styled';
+import { Btn, Username } from './UserMenu.styled';
 import { GiExitDoor } from 'react-icons/gi';
 
 export const UserMenu = () => {
@@ -15,7 +15,9 @@ export const UserMenu = () => {
 
   return (
     <>
-      <p>Welcome, {user.name}</p>
+      <p>
+        Welcome, <Username>{user.name}</Username>
+      </p>
       <Btn type="button" onClick={handleOut}>
         Log out
         <GiExitDoor

@@ -19,3 +19,10 @@ export const Btn = styled.button`
     scale: 1.1;
   }
 `;
+export const Username = styled.span`
+  // width: 80px;
+  // padding-top: 5px;
+  // padding-bottom: 5px;
+  background-color: #ebdf02;
+  border-radius: 4px;
+`;
