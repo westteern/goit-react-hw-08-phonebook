@@ -1,12 +1,13 @@
 import { LoginForm } from '../components/LoginForm/LoginForm';
+import { Section } from './pages.styled';
 
 export default function Login() {
   return (
-    <div>
+    <Section>
       <div>
         <title>Login</title>
       </div>
       <LoginForm />
-    </div>
+    </Section>
   );
 }

@@ -1,4 +1,4 @@
-import { SectionPhonebook } from '../components/App.styled';
+import { Section } from './pages.styled';
 import { useSelector } from 'react-redux';
 import DataInput from 'components/DataInput';
 import DataList from 'components/DataList';
@@ -11,12 +11,12 @@ export default function Contacts() {
     <>
       {error && <p>Something went wrong, please restart the app</p>}
       {!error && (
-        <SectionPhonebook>
-          <h2>Your phonebook</h2>
+        <Section>
+          <h3>Your phonebook</h3>
           <DataInput />
-          <h2>Contacts</h2>
+          <h3>Contacts</h3>
           <DataList />
-        </SectionPhonebook>
+        </Section>
       )}
     </>
   );

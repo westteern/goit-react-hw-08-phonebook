@@ -6,7 +6,6 @@ import 'react-toastify/dist/ReactToastify.css';
 const handleAuthPending = state => state;
 const handleAuthRejected = (state, action) => {
   const error = action.error.message;
-  console.log(error);
   toast.error(`${error}, please try again`);
 };
 
@@ -35,7 +34,6 @@ const authSlice = createSlice({
       state.user = action.payload.user;
       state.token = action.payload.token;
       state.isLoggedIn = true;
-      console.log(action.payload.user);
       toast.info(`Login was successful, wellcome ${action.payload.user.name}`);
     },
     [logIn.rejected]: handleAuthRejected,

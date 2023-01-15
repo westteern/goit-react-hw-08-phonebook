@@ -1,6 +1,21 @@
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { logIn } from 'redux/auth/service';
+import { MdOutlineVisibility, MdOutlineVisibilityOff } from 'react-icons/md';
+import { BsKey } from 'react-icons/bs';
+import { HiOutlineMail } from 'react-icons/hi';
+
+import {
+  SubmitBtn,
+  VisibleBtn,
+  LableInput,
+  LableInputWrapper,
+  Form,
+  SectionFormInput,
+  Input,
+  Icon,
+  Label,
+} from './LoginForm.styled';
 
 export const LoginForm = () => {
   const [email, setEmail] = useState('');
@@ -39,23 +54,63 @@ export const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} autoComplete="off">
-      <label>
-        Email
-        <input type="email" name="email" onChange={handleInput} />
-      </label>
-      <label>
-        Password
-        <input
-          type={isVisiblePassword ? 'text' : 'password'}
-          name="password"
-          onChange={handleInput}
-        />
-        <button type="button" onClick={handleVisiblePassword}>
-          Visible
-        </button>
-      </label>
-      <button type="submit">Log In</button>
-    </form>
+    <SectionFormInput>
+      <Form onSubmit={handleSubmit} autoComplete="off">
+        <LableInput>
+          <Label>email</Label>
+          <LableInputWrapper>
+            <Icon>
+              <HiOutlineMail
+                style={{
+                  width: '24',
+                  height: '24',
+                  verticalAlign: 'middle',
+                }}
+              />
+            </Icon>
+            <Input type="email" name="email" onChange={handleInput} />
+          </LableInputWrapper>
+        </LableInput>
+        <LableInput>
+          <Label>password</Label>
+          <LableInputWrapper>
+            <Icon>
+              <BsKey
+                style={{
+                  width: '24',
+                  height: '24',
+                  verticalAlign: 'middle',
+                }}
+              />
+            </Icon>
+            <Input
+              type={isVisiblePassword ? 'text' : 'password'}
+              name="password"
+              onChange={handleInput}
+            />
+            <VisibleBtn type="button" onClick={handleVisiblePassword}>
+              {isVisiblePassword ? (
+                <MdOutlineVisibility
+                  style={{
+                    width: '20',
+                    height: '20',
+                    verticalAlign: 'middle',
+                  }}
+                />
+              ) : (
+                <MdOutlineVisibilityOff
+                  style={{
+                    width: '20',
+                    height: '20',
+                    verticalAlign: 'middle',
+                  }}
+                />
+              )}
+            </VisibleBtn>
+          </LableInputWrapper>
+        </LableInput>
+        <SubmitBtn type="submit">Log In</SubmitBtn>
+      </Form>
+    </SectionFormInput>
   );
 };

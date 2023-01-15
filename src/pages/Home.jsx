@@ -1,12 +1,13 @@
+import { Section, Wellcome } from './pages.styled';
+
 export default function Home() {
   return (
-    <div>
-      <h1>
-        Phonebook welcome page{' '}
-        <span role="img" aria-label="Greeting icon">
-          💁‍♀️
-        </span>
-      </h1>
-    </div>
+    <Section>
+      <Wellcome>Welcome to our application "Phonebook"</Wellcome>
+      <img
+        src="https://cdn.pixabay.com/photo/2018/09/22/19/25/smartphone-3695936_1280.png"
+        alt="wellcome"
+      />
+    </Section>
   );
 }
